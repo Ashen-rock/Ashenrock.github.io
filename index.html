@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashenrock</title>
     
-    <!-- Social Preview Tags (WhatsApp, LinkedIn, Twitter) -->
+    <!-- Social Preview Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ashen-rock.github.io/Ashenrock.github.io/">
     <meta property="og:title" content="Ashenrock">
@@ -31,32 +31,35 @@
             font-family: 'Space Mono', monospace;
         }
 
-        body {
-            background-color: #050807;
-            color: #bdc5b5;
-            padding: 0;
-            margin: 0;
+        html, body {
+            width: 100%;
             min-height: 100vh;
+            background-color: #030605;
+            color: #bdc5b5;
             overflow-x: hidden;
         }
 
-        /* STARFIELD BACKGROUND (DEEP SPACE INTERSTELLAR EFFECT) */
         #starfield {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: -1;
+            z-index: 0;
             pointer-events: none;
-            background: radial-gradient(circle at 50% 30%, #0d1618 0%, #060b0d 60%, #020405 100%);
+        }
+
+        .site-content {
+            position: relative;
+            z-index: 1;
+            width: 100%;
         }
 
         .landing-container {
             position: relative;
             width: 100%;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(5, 8, 7, 0.45), rgba(5, 8, 7, 0.75)), url('bg.jpeg');
+            background-image: linear-gradient(rgba(3, 6, 5, 0.5), rgba(3, 6, 5, 0.8)), url('bg.jpeg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -106,7 +109,6 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 80px 60px;
-            position: relative;
         }
 
         .grid-row {
@@ -136,7 +138,7 @@
         .middle-image-wrapper {
             width: 100%;
             margin: 40px 0 90px 0;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
         }
 
         .middle-image-wrapper img {
@@ -238,148 +240,167 @@
             align-items: center;
             font-size: 13px;
             color: #5c6656;
-            background: rgba(5, 8, 7, 0.8);
+            background: rgba(3, 6, 5, 0.85);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 24px;
         }
 
         footer a {
             color: #5c6656;
             text-decoration: none;
+            letter-spacing: 1px;
+            font-size: 12px;
         }
 
         footer a:hover {
-            color: #8c9685;
+            color: #bdc5b5;
         }
 
-        /* MOBILE FIXES & IMAGE CONTAINMENT */
         @media (max-width: 850px) {
             .landing-container {
-                padding: 30px 24px;
-                background-size: contain;
-                background-position: center top;
-                min-height: auto;
+                padding: 40px 24px;
+                min-height: 100vh;
+                background-size: cover;
+                background-position: center center;
             }
             .main-wrapper, footer {
-                padding: 30px 24px;
+                padding: 40px 24px;
             }
             .landing-content {
                 margin-top: 40px;
                 margin-bottom: 30px;
             }
             .landing-content h1 {
-                font-size: 36px;
+                font-size: 38px;
             }
             .grid-row, .feature-item {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            footer {
+                flex-direction: column;
                 gap: 16px;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- INTERSTELLAR STARFIELD CANVAS -->
     <canvas id="starfield"></canvas>
 
-    <div class="landing-container">
-        <header>
-            <img src="logo.png" alt="Ashenrock Logo" class="logo-img">
-        </header>
+    <div class="site-content">
+        <div class="landing-container">
+            <header>
+                <img src="logo.png" alt="Ashenrock Logo" class="logo-img">
+            </header>
 
-        <section class="landing-content">
-            <h1>Solving<br>problems<br>conventional<br>systems<br>don't.</h1>
-            <p>Emission-free, off-grid alternatives to the products most infrastructure depends on.</p>
-        </section>
-        <div></div>
+            <section class="landing-content">
+                <h1>Solving<br>problems<br>conventional<br>systems<br>don't.</h1>
+                <p>Emission-free, off-grid alternatives to the products most infrastructure depends on.</p>
+            </section>
+            <div></div>
+        </div>
+
+        <div class="main-wrapper">
+
+            <div class="grid-row">
+                <div class="side-label">WHAT WE DO</div>
+                <div class="content-body">
+                    <p>Ashenrock is developing emission-free, off-grid alternatives to the essential products that conventional systems rely on. We are focused on the problem, not the narrative around it.</p>
+                    <p>Currently in R&D. If you are working on something adjacent, get in touch.</p>
+                </div>
+            </div>
+
+            <div class="middle-image-wrapper">
+                <img src="page.jpeg" alt="Ashenrock Overview Image">
+            </div>
+
+            <div class="grid-row">
+                <div class="side-label">FOCUS AREAS</div>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>Off-Grid Energy</h3>
+                        <p>Emission-free power systems that operate independently of conventional grid infrastructure.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>Alternative Vitals</h3>
+                        <p>Replacements for conventional essential systems — water, heat, air — built without fossil inputs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>R&D</h3>
+                        <p>We are in active development. Products are not yet available for general sale.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-row">
+                <div class="side-label">CONTACT</div>
+                <div class="contact-container">
+                    <p class="contact-intro">Write to us directly. We read everything.</p>
+                    
+                    <form action="https://formsubmit.co/contactashenrock@gmail.com" method="POST">
+                        <div class="form-group">
+                            <label for="name">YOUR NAME</label>
+                            <input type="text" id="name" name="Your Name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">YOUR EMAIL</label>
+                            <input type="email" id="email" name="Your Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">YOUR MESSAGE</label>
+                            <textarea id="message" name="Your Message" rows="3" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">SEND MESSAGE —></button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <footer>
+            <div>© 2026 Ashenrock</div>
+            <div class="social-links">
+                <a href="mailto:contactashenrock@gmail.com">contactashenrock@gmail.com</a>
+                <a href="https://ashen-rock.github.io/Ashenrock.github.io/in" target="_blank" rel="noopener">LINKEDIN</a>
+                <a href="https://www.instagram.com/_ashenrock/" target="_blank" rel="noopener">INSTAGRAM</a>
+            </div>
+        </footer>
     </div>
 
-    <div class="main-wrapper">
-
-        <div class="grid-row">
-            <div class="side-label">WHAT WE DO</div>
-            <div class="content-body">
-                <p>Ashenrock is developing emission-free, off-grid alternatives to the essential products that conventional systems rely on. We are focused on the problem, not the narrative around it.</p>
-                <p>Currently in R&D. If you are working on something adjacent, get in touch.</p>
-            </div>
-        </div>
-
-        <div class="middle-image-wrapper">
-            <img src="page.jpeg" alt="Ashenrock Overview Image">
-        </div>
-
-        <div class="grid-row">
-            <div class="side-label">FOCUS AREAS</div>
-            <div class="feature-list">
-                <div class="feature-item">
-                    <h3>Off-Grid Energy</h3>
-                    <p>Emission-free power systems that operate independently of conventional grid infrastructure.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>Alternative Vitals</h3>
-                    <p>Replacements for conventional essential systems — water, heat, air — built without fossil inputs.</p>
-                </div>
-                <div class="feature-item">
-                    <h3>R&D</h3>
-                    <p>We are in active development. Products are not yet available for general sale.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-row">
-            <div class="side-label">CONTACT</div>
-            <div class="contact-container">
-                <p class="contact-intro">Write to us directly. We read everything.</p>
-                
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">NAME</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">EMAIL</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">MESSAGE</label>
-                        <textarea id="message" name="message" rows="3" required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">SEND MESSAGE —></button>
-                </form>
-            </div>
-        </div>
-
-    </div>
-
-    <footer>
-        <div>© 2026 Ashenrock</div>
-        <div><a href="mailto:contact@ashenrock.com">contact@ashenrock.com</a></div>
-    </footer>
-
-    <!-- INTERACTION STARFIELD SCRIPT -->
     <script>
         const canvas = document.getElementById('starfield');
         const ctx = canvas.getContext('2d');
 
         let width, height;
         let stars = [];
-        let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+        let mouse = { x: -1000, y: -1000, radius: 180 };
 
         function initCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
             stars = [];
-            const starCount = Math.floor((width * height) / 3000);
+            
+            const starCount = Math.floor((width * height) / 2000);
 
             for (let i = 0; i < starCount; i++) {
                 stars.push({
                     x: Math.random() * width,
                     y: Math.random() * height,
-                    size: Math.random() * 1.5 + 0.3,
+                    baseSize: Math.random() * 1.5 + 0.3,
                     alpha: Math.random() * 0.7 + 0.2,
-                    speed: Math.random() * 0.15 + 0.05,
-                    depth: Math.random() * 0.8 + 0.2
+                    depth: Math.random() * 0.8 + 0.2,
+                    vx: 0,
+                    vy: 0,
+                    ox: 0,
+                    oy: 0
                 });
             }
         }
@@ -387,36 +408,59 @@
         window.addEventListener('resize', initCanvas);
         initCanvas();
 
-        window.addEventListener('mousemove', (e) => {
-            mouse.targetX = (e.clientX - width / 2) * 0.03;
-            mouse.targetY = (e.clientY - height / 2) * 0.03;
-        });
+        const updateMouse = (x, y) => {
+            mouse.x = x;
+            mouse.y = y;
+        };
 
+        window.addEventListener('mousemove', (e) => updateMouse(e.clientX, e.clientY));
         window.addEventListener('touchmove', (e) => {
             if (e.touches.length > 0) {
-                mouse.targetX = (e.touches[0].clientX - width / 2) * 0.03;
-                mouse.targetY = (e.touches[0].clientY - height / 2) * 0.03;
+                updateMouse(e.touches[0].clientX, e.touches[0].clientY);
             }
         });
 
         function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            mouse.x += (mouse.targetX - mouse.x) * 0.05;
-            mouse.y += (mouse.targetY - mouse.y) * 0.05;
+            ctx.fillStyle = '#030605';
+            ctx.fillRect(0, 0, width, height);
 
             const scrollY = window.scrollY * 0.15;
 
             for (let i = 0; i < stars.length; i++) {
                 let star = stars[i];
 
-                let renderX = star.x + mouse.x * star.depth;
-                let renderY = (star.y - scrollY * star.depth) % height;
-                if (renderY < 0) renderY += height;
+                let rawX = star.x + star.ox;
+                let rawY = (star.y + star.oy - scrollY * star.depth) % height;
+                if (rawY < 0) rawY += height;
 
-                ctx.fillStyle = `rgba(200, 220, 210, ${star.alpha})`;
+                let dx = mouse.x - rawX;
+                let dy = mouse.y - rawY;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < mouse.radius) {
+                    let force = (mouse.radius - distance) / mouse.radius;
+                    let angle = Math.atan2(dy, dx);
+                    star.vx -= Math.cos(angle) * force * 1.2 * star.depth;
+                    star.vy -= Math.sin(angle) * force * 1.2 * star.depth;
+                }
+
+                star.ox += star.vx;
+                star.oy += star.vy;
+                star.vx *= 0.88;
+                star.vy *= 0.88;
+                star.ox *= 0.95;
+                star.oy *= 0.95;
+
+                let size = star.baseSize;
+                let alpha = star.alpha;
+                if (distance < mouse.radius) {
+                    alpha = Math.min(1, star.alpha + 0.3);
+                    size = star.baseSize * 1.4;
+                }
+
+                ctx.fillStyle = `rgba(205, 225, 215, ${alpha})`;
                 ctx.beginPath();
-                ctx.arc(renderX, renderY, star.size, 0, Math.PI * 2);
+                ctx.arc(rawX, rawY, size, 0, Math.PI * 2);
                 ctx.fill();
             }
 
