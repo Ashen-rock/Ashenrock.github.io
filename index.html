@@ -369,7 +369,8 @@
             <div>© 2026 Ashenrock</div>
             <div class="social-links">
                 <a href="mailto:contactashenrock@gmail.com">contactashenrock@gmail.com</a>
-                <a href="https://ashen-rock.github.io/Ashenrock.github.io/in" target="_blank" rel="noopener">LINKEDIN</a>
+                <!-- Replace with direct LinkedIn URL once profile is created -->
+                <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN</a>
                 <a href="https://www.instagram.com/_ashenrock/" target="_blank" rel="noopener">INSTAGRAM</a>
             </div>
         </footer>
@@ -381,14 +382,15 @@
 
         let width, height;
         let stars = [];
-        let mouse = { x: -1000, y: -1000, radius: 180 };
+        // Reduced radius and force so stars nudge gently without making a gaping void
+        let mouse = { x: -1000, y: -1000, radius: 80 };
 
         function initCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
             stars = [];
             
-            const starCount = Math.floor((width * height) / 2000);
+            const starCount = Math.floor((width * height) / 2200);
 
             for (let i = 0; i < starCount; i++) {
                 stars.push({
@@ -397,10 +399,13 @@
                     baseSize: Math.random() * 1.5 + 0.3,
                     alpha: Math.random() * 0.7 + 0.2,
                     depth: Math.random() * 0.8 + 0.2,
-                    vx: 0,
-                    vy: 0,
+                    // Among Us style left/right floating drift speed
+                    driftX: (Math.random() - 0.2) * 0.35,
+                    driftY: (Math.random() - 0.5) * 0.15,
                     ox: 0,
-                    oy: 0
+                    oy: 0,
+                    vx: 0,
+                    vy: 0
                 });
             }
         }
@@ -414,6 +419,7 @@
         };
 
         window.addEventListener('mousemove', (e) => updateMouse(e.clientX, e.clientY));
+        window.addEventListener('mouseleave', () => updateMouse(-1000, -1000));
         window.addEventListener('touchmove', (e) => {
             if (e.touches.length > 0) {
                 updateMouse(e.touches[0].clientX, e.touches[0].clientY);
@@ -429,6 +435,16 @@
             for (let i = 0; i < stars.length; i++) {
                 let star = stars[i];
 
+                // Update continuous floating motion
+                star.x += star.driftX * star.depth;
+                star.y += star.driftY * star.depth;
+
+                // Screen edge wrap-around for continuous space float
+                if (star.x < 0) star.x += width;
+                if (star.x > width) star.x -= width;
+                if (star.y < 0) star.y += height;
+                if (star.y > height) star.y -= height;
+
                 let rawX = star.x + star.ox;
                 let rawY = (star.y + star.oy - scrollY * star.depth) % height;
                 if (rawY < 0) rawY += height;
@@ -437,25 +453,26 @@
                 let dy = mouse.y - rawY;
                 let distance = Math.sqrt(dx * dx + dy * dy);
 
+                // Mild cursor repulsion effect
                 if (distance < mouse.radius) {
                     let force = (mouse.radius - distance) / mouse.radius;
                     let angle = Math.atan2(dy, dx);
-                    star.vx -= Math.cos(angle) * force * 1.2 * star.depth;
-                    star.vy -= Math.sin(angle) * force * 1.2 * star.depth;
+                    star.vx -= Math.cos(angle) * force * 0.3 * star.depth;
+                    star.vy -= Math.sin(angle) * force * 0.3 * star.depth;
                 }
 
                 star.ox += star.vx;
                 star.oy += star.vy;
-                star.vx *= 0.88;
-                star.vy *= 0.88;
-                star.ox *= 0.95;
-                star.oy *= 0.95;
+                star.vx *= 0.85;
+                star.vy *= 0.85;
+                star.ox *= 0.92;
+                star.oy *= 0.92;
 
                 let size = star.baseSize;
                 let alpha = star.alpha;
                 if (distance < mouse.radius) {
-                    alpha = Math.min(1, star.alpha + 0.3);
-                    size = star.baseSize * 1.4;
+                    alpha = Math.min(1, star.alpha + 0.25);
+                    size = star.baseSize * 1.25;
                 }
 
                 ctx.fillStyle = `rgba(205, 225, 215, ${alpha})`;
