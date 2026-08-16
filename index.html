@@ -11,6 +11,8 @@
     <meta property="og:title" content="Ashenrock">
     <meta property="og:description" content="Solving problems conventional systems don't.">
     <meta property="og:image" content="https://ashen-rock.github.io/Ashenrock.github.io/logo.png">
+    <meta property="og:image:secure_url" content="https://ashen-rock.github.io/Ashenrock.github.io/logo.png">
+    <meta property="og:image:type" content="image/png">
     
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ashenrock">
@@ -20,6 +22,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
     <style>
         * {
             box-sizing: border-box;
@@ -29,20 +32,33 @@
         }
 
         body {
-            background-color: #0d1110;
+            background-color: #050807;
             color: #bdc5b5;
             padding: 0;
             margin: 0;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* STARFIELD BACKGROUND (DEEP SPACE INTERSTELLAR EFFECT) */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle at 50% 30%, #0d1618 0%, #060b0d 60%, #020405 100%);
         }
 
         .landing-container {
             position: relative;
             width: 100%;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(13, 17, 16, 0.65), rgba(13, 17, 16, 0.85)), url('bg.jpeg');
+            background-image: linear-gradient(rgba(5, 8, 7, 0.45), rgba(5, 8, 7, 0.75)), url('bg.jpeg');
             background-size: cover;
-            background-position: center;
+            background-position: center center;
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
@@ -63,12 +79,6 @@
             display: block;
         }
 
-        .menu-icon {
-            font-size: 24px;
-            color: #bdc5b5;
-            cursor: pointer;
-        }
-
         .landing-content {
             max-width: 900px;
             margin-top: 80px;
@@ -82,6 +92,7 @@
             color: #c5cdbc;
             letter-spacing: -1px;
             margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(197, 205, 188, 0.15);
         }
 
         .landing-content p {
@@ -95,6 +106,7 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 80px 60px;
+            position: relative;
         }
 
         .grid-row {
@@ -124,6 +136,7 @@
         .middle-image-wrapper {
             width: 100%;
             margin: 40px 0 90px 0;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
         }
 
         .middle-image-wrapper img {
@@ -225,6 +238,7 @@
             align-items: center;
             font-size: 13px;
             color: #5c6656;
+            background: rgba(5, 8, 7, 0.8);
         }
 
         footer a {
@@ -236,12 +250,23 @@
             color: #8c9685;
         }
 
+        /* MOBILE FIXES & IMAGE CONTAINMENT */
         @media (max-width: 850px) {
-            .landing-container, .main-wrapper, footer {
+            .landing-container {
+                padding: 30px 24px;
+                background-size: contain;
+                background-position: center top;
+                min-height: auto;
+            }
+            .main-wrapper, footer {
                 padding: 30px 24px;
             }
+            .landing-content {
+                margin-top: 40px;
+                margin-bottom: 30px;
+            }
             .landing-content h1 {
-                font-size: 40px;
+                font-size: 36px;
             }
             .grid-row, .feature-item {
                 grid-template-columns: 1fr;
@@ -252,10 +277,12 @@
 </head>
 <body>
 
+    <!-- INTERSTELLAR STARFIELD CANVAS -->
+    <canvas id="starfield"></canvas>
+
     <div class="landing-container">
         <header>
             <img src="logo.png" alt="Ashenrock Logo" class="logo-img">
-            <div class="menu-icon">≡</div>
         </header>
 
         <section class="landing-content">
@@ -330,5 +357,73 @@
         <div><a href="mailto:contact@ashenrock.com">contact@ashenrock.com</a></div>
     </footer>
 
+    <!-- INTERACTION STARFIELD SCRIPT -->
+    <script>
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+
+        let width, height;
+        let stars = [];
+        let mouse = { x: 0, y: 0, targetX: 0, targetY: 0 };
+
+        function initCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            stars = [];
+            const starCount = Math.floor((width * height) / 3000);
+
+            for (let i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    size: Math.random() * 1.5 + 0.3,
+                    alpha: Math.random() * 0.7 + 0.2,
+                    speed: Math.random() * 0.15 + 0.05,
+                    depth: Math.random() * 0.8 + 0.2
+                });
+            }
+        }
+
+        window.addEventListener('resize', initCanvas);
+        initCanvas();
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.targetX = (e.clientX - width / 2) * 0.03;
+            mouse.targetY = (e.clientY - height / 2) * 0.03;
+        });
+
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length > 0) {
+                mouse.targetX = (e.touches[0].clientX - width / 2) * 0.03;
+                mouse.targetY = (e.touches[0].clientY - height / 2) * 0.03;
+            }
+        });
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            mouse.x += (mouse.targetX - mouse.x) * 0.05;
+            mouse.y += (mouse.targetY - mouse.y) * 0.05;
+
+            const scrollY = window.scrollY * 0.15;
+
+            for (let i = 0; i < stars.length; i++) {
+                let star = stars[i];
+
+                let renderX = star.x + mouse.x * star.depth;
+                let renderY = (star.y - scrollY * star.depth) % height;
+                if (renderY < 0) renderY += height;
+
+                ctx.fillStyle = `rgba(200, 220, 210, ${star.alpha})`;
+                ctx.beginPath();
+                ctx.arc(renderX, renderY, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
 </body>
 </html>
