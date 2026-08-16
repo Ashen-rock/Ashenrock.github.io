@@ -23,12 +23,11 @@
             min-height: 100vh;
         }
 
-        /* HERO SECTION WITH BACKGROUND IMAGE */
-        .hero-container {
+        .landing-container {
             position: relative;
             width: 100%;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(13, 17, 16, 0.65), rgba(13, 17, 16, 0.85)), url('hero-bg.jpg');
+            background-image: linear-gradient(rgba(13, 17, 16, 0.65), rgba(13, 17, 16, 0.85)), url('bg.jpeg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -57,13 +56,13 @@
             cursor: pointer;
         }
 
-        .hero-content {
+        .landing-content {
             max-width: 900px;
             margin-top: 80px;
             margin-bottom: 60px;
         }
 
-        .hero-content h1 {
+        .landing-content h1 {
             font-size: 64px;
             line-height: 1.1;
             font-weight: 400;
@@ -72,14 +71,13 @@
             margin-bottom: 40px;
         }
 
-        .hero-content p {
+        .landing-content p {
             color: #8c9685;
             font-size: 16px;
             line-height: 1.6;
             max-width: 650px;
         }
 
-        /* MAIN CONTENT SECTION */
         .main-wrapper {
             max-width: 1200px;
             margin: 0 auto;
@@ -110,7 +108,6 @@
             max-width: 750px;
         }
 
-        /* MIDDLE IMAGE CONTAINER */
         .middle-image-wrapper {
             width: 100%;
             margin: 40px 0 90px 0;
@@ -122,7 +119,6 @@
             display: block;
         }
 
-        /* FOCUS AREAS GRID */
         .feature-list {
             display: flex;
             flex-direction: column;
@@ -149,7 +145,6 @@
             margin: 0;
         }
 
-        /* CONTACT FORM */
         .contact-container {
             max-width: 650px;
         }
@@ -209,7 +204,6 @@
             color: #ffffff;
         }
 
-        /* FOOTER */
         footer {
             border-top: 1px solid #1a2219;
             padding: 40px 60px;
@@ -230,10 +224,10 @@
         }
 
         @media (max-width: 850px) {
-            .hero-container, .main-wrapper, footer {
+            .landing-container, .main-wrapper, footer {
                 padding: 30px 24px;
             }
-            .hero-content h1 {
+            .landing-content h1 {
                 font-size: 40px;
             }
             .grid-row, .feature-item {
@@ -245,24 +239,21 @@
 </head>
 <body>
 
-    <!-- HERO SECTION WITH TOP NAV AND BG IMAGE -->
-    <div class="hero-container">
+    <div class="landing-container">
         <header>
-            <img src="logo.png" alt="Ashenrock" class="logo-img">
+            <img src="logo.png" alt="Ashenrock Logo" class="logo-img">
             <div class="menu-icon">≡</div>
         </header>
 
-        <section class="hero-content">
+        <section class="landing-content">
             <h1>Solving<br>problems<br>conventional<br>systems<br>don't.</h1>
             <p>Emission-free, off-grid alternatives to the products most infrastructure depends on.</p>
         </section>
         <div></div>
     </div>
 
-    <!-- MAIN BODY CONTENT -->
     <div class="main-wrapper">
 
-        <!-- WHAT WE DO -->
         <div class="grid-row">
             <div class="side-label">WHAT WE DO</div>
             <div class="content-body">
@@ -271,12 +262,10 @@
             </div>
         </div>
 
-        <!-- MIDDLE SECTION IMAGE -->
         <div class="middle-image-wrapper">
-            <img src="building.jpg" alt="Ashenrock Building Overview">
+            <img src="page.jpeg" alt="Ashenrock Overview Image">
         </div>
 
-        <!-- FOCUS AREAS -->
         <div class="grid-row">
             <div class="side-label">FOCUS AREAS</div>
             <div class="feature-list">
@@ -295,7 +284,6 @@
             </div>
         </div>
 
-        <!-- CONTACT SECTION -->
         <div class="grid-row">
             <div class="side-label">CONTACT</div>
             <div class="contact-container">
